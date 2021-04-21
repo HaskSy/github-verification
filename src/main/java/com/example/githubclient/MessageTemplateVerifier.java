@@ -22,7 +22,7 @@ public class MessageTemplateVerifier {
     }
 
     public static String buildMessage(String title) {
-        if (title.matches(regex)) {
+        if (process(title)) {
             return OK_MESSAGE;
         }
         else {
