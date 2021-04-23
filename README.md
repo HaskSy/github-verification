@@ -9,7 +9,7 @@ This repo has code which is going to be able to check titles of pull requests au
 |---|---|
 |Added title checker|✅|
 |Added scheduling support|✅|
-|Created Mapping Classes for JSON|❌|
+|Created Mapping Classes for JSON|✅|
 |Get all PRs* from User's repository |❔|
 |Get all PR's commits|❔|
 |Get all PR's issue comments|❔|
