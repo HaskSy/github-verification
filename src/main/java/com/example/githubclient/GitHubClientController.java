@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class GitHubClientController {
@@ -48,5 +49,37 @@ public class GitHubClientController {
             @PathVariable("repo") String repoName,
             @PathVariable("number") int number) throws IOException {
         return githubService.getPullIssue(repoName, owner, number);
+    }
+
+    @GetMapping("/repos/{owner}/{repo}/pull/{number}/review/post")
+    public ReviewComment leaveReviewComment(@PathVariable("owner") String owner,
+                                          @PathVariable("repo") String repoName,
+                                          @PathVariable("number") int number) throws IOException {
+
+        Pull pull = getPulls(owner, repoName).stream()
+                .filter(p -> p.getNumber() == number)
+                .collect(Collectors.toList()).get(0);
+
+        // List<CommitNode> commitNodeList = getCommit(owner, repoName, number);
+
+        String messageBody = MessageTemplateVerifier.buildMessage(pull.getTitle());
+
+        return githubService.createPullReview(owner, repoName, number, messageBody);
+    }
+
+    @GetMapping("/repos/{owner}/{repo}/pull/{number}/issue/post")
+    public IssueComment leaveIssueComment(@PathVariable("owner") String owner,
+                                      @PathVariable("repo") String repoName,
+                                      @PathVariable("number") int number) throws IOException {
+
+        Pull pull = getPulls(owner, repoName).stream()
+                .filter(p -> p.getNumber() == number)
+                .collect(Collectors.toList()).get(0);
+
+        // List<CommitNode> commitNodeList = getCommit(owner, repoName, number);
+
+        String messageBody = MessageTemplateVerifier.buildMessage(pull.getTitle());
+
+        return githubService.createPullIssue(owner, repoName, number, messageBody);
     }
 }

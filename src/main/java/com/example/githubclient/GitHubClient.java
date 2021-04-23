@@ -93,4 +93,37 @@ public class GitHubClient {
 
         return response.body();
     }
+
+    public ReviewComment createPullReview(String owner, String repo, int number, String message) throws IOException {
+        ReviewComment comm = new ReviewComment();
+        comm.setBody(message);
+        Call<ReviewComment> retrofitCall = service.createReviewComment(comm, accessToken, API_VERSION_SPEC, JSON_CONTENT_TYPE, owner, repo, number);
+
+        Response<ReviewComment> response = retrofitCall.execute();
+
+        if (!response.isSuccessful()) {
+            throw new IOException(response.errorBody() != null
+                    ? response.errorBody().string() : "Unknown error");
+        }
+
+        return response.body();
+    }
+
+    public IssueComment createPullIssue(String owner, String repo, int number, String message) throws IOException {
+        IssueComment comm = new IssueComment();
+        comm.setBody(message);
+        Call<IssueComment> retrofitCall = service.createIssueComment(comm, accessToken, API_VERSION_SPEC, JSON_CONTENT_TYPE, owner, repo, number);
+
+        Response<IssueComment> response = retrofitCall.execute();
+
+        if (!response.isSuccessful()) {
+            throw new IOException(response.errorBody() != null
+                    ? response.errorBody().string() : "Unknown error");
+        }
+
+        return response.body();
+    }
+
 }
+
+

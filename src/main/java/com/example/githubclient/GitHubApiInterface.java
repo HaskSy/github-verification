@@ -5,9 +5,7 @@ import com.example.githubclient.model.IssueComment;
 import com.example.githubclient.model.Pull;
 import com.example.githubclient.model.ReviewComment;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -28,4 +26,22 @@ public interface GitHubApiInterface {
     @GET("repos/{owner}/{repo}/issues/{number}/comments")
     Call<List<IssueComment>> listIssueComments(@Header("Authorization") String accessToken, @Header("Accept") String apiVersionSpec,
                                                @Path("repo") String repo, @Path("owner") String owner, @Path("number") int number);
+
+    @POST("/repos/{owner}/{repo}/pulls/{number}/comments")
+    Call<ReviewComment> createReviewComment(@Body ReviewComment comm,
+                             @Header("Authorization") String accessToken,
+                             @Header("Accept") String apiVersionSpec,
+                             @Header("Content-Type") String contentType,
+                             @Path("owner") String owner,
+                             @Path("repo") String repo,
+                             @Path("number") int number);
+
+    @POST("repos/{owner}/{repo}/issues/{number}/comments")
+    Call<IssueComment> createIssueComment(@Body IssueComment comm,
+                                      @Header("Authorization") String accessToken,
+                                      @Header("Accept") String apiVersionSpec,
+                                      @Header("Content-Type") String contentType,
+                                      @Path("owner") String owner,
+                                      @Path("repo") String repo,
+                                      @Path("number") int number);
 }
