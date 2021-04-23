@@ -1,16 +1,20 @@
 package com.example.githubclient.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class Pull implements Serializable {
 
     @JsonProperty("title")
+    @SerializedName("title")
     private String title;
     @JsonProperty("number")
+    @SerializedName("number")
     private int number;
     @JsonProperty("state")
+    @SerializedName("state")
     private String state;
 
 
