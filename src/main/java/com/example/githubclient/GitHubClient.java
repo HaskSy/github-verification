@@ -1,5 +1,6 @@
 package com.example.githubclient;
 
+import com.example.githubclient.model.CommitNode;
 import com.example.githubclient.model.Pull;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,20 @@ public class GitHubClient {
             throw new IOException(response.errorBody() != null
                     ? response.errorBody().string() : "Unknown error");
         }
+
+        return response.body();
+    }
+
+    public List<CommitNode> getCommitNodes(String repo, String owner, int number) throws IOException {
+        Call<List<CommitNode>> retrofitCall = service.listCommits(accessToken, API_VERSION_SPEC, repo, owner, number);
+
+        Response<List<CommitNode>> response = retrofitCall.execute();
+
+        if (!response.isSuccessful()) {
+            throw new IOException(response.errorBody() != null
+                    ? response.errorBody().string() : "Unknown error");
+        }
+
 
         return response.body();
     }
