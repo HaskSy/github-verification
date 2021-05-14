@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class CommitNode implements Serializable {
 
@@ -41,5 +42,9 @@ public class CommitNode implements Serializable {
 
     public void setSha(String sha) {
         this.sha = sha;
+    }
+
+    public Date getDate() {
+        return this.getCommit().getAuthor().getDate();
     }
 }
