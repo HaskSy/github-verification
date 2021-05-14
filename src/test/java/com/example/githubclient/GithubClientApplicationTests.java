@@ -1,20 +1,26 @@
 package com.example.githubclient;
 
-import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.Assert;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class GithubClientApplicationTests {
+import static com.example.githubclient.MessageTemplateVerifier.process;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+
+public class GithubClientApplicationTests extends AbstractGithubClientTest {
+
+
+	@Test
+	public void testHello() {
+		assertFalse(process("fcgdfvscgyvdshcgvdshc"));
+	}
 
 	@Test
 	public void testProcessFunc() {
 		String title1 = "LEETCODE 2022 Added solution for course-schedule";
 		String title2 = "LEETCODE 2022 Added solution for squares-of-a-sorted-array";
-		String title3 = "LEETCODE 1012 Added solution for valid-palindrome";
+		String title3 = "LEETCODE 1021 Added solution for valid-palindrome";
 
 		String title4 = "Added My Generator";
 		String title5 = "Design";
@@ -24,17 +30,17 @@ public class GithubClientApplicationTests {
 		String title9 = "LEETCODE 2022 Added";
 		String title10 = "SMTHELSE 2022 Added solution for flatten-nested-list-iterator)";
 
-		Assert.assertTrue(MessageTemplateVerifier.process(title1));
-		Assert.assertTrue(MessageTemplateVerifier.process(title2));
-		Assert.assertTrue(MessageTemplateVerifier.process(title3));
+		Assert.assertTrue(process(title1));
+		Assert.assertTrue(process(title2));
+		Assert.assertTrue(process(title3));
 
-		Assert.assertFalse(MessageTemplateVerifier.process(title4));
-		Assert.assertFalse(MessageTemplateVerifier.process(title5));
-		Assert.assertFalse(MessageTemplateVerifier.process(title6));
-		Assert.assertFalse(MessageTemplateVerifier.process(title7));
-		Assert.assertFalse(MessageTemplateVerifier.process(title8));
-		Assert.assertFalse(MessageTemplateVerifier.process(title9));
-		Assert.assertFalse(MessageTemplateVerifier.process(title10));
+		assertFalse(process(title4));
+		assertFalse(process(title5));
+		assertFalse(process(title6));
+		assertFalse(process(title7));
+		assertFalse(process(title8));
+		assertFalse(process(title9));
+		assertFalse(process(title10));
 
 	}
 
