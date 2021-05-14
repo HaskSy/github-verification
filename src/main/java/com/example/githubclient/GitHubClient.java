@@ -39,9 +39,9 @@ public class GitHubClient {
         br.close();
     }
 
-    public List<Pull> getUserRepoPulls(String repo, String owner) throws IOException {
-        Call<List<Pull>> retrofitCall = service.listUserRepoPulls(accessToken, API_VERSION_SPEC, repo, owner);
+    public List<Pull> getUserRepoPulls(String owner, String repo) throws IOException {
 
+        Call<List<Pull>> retrofitCall = service.listUserRepoPulls(accessToken, API_VERSION_SPEC, owner, repo);
         Response<List<Pull>> response = retrofitCall.execute();
 
         if (!response.isSuccessful()) {
@@ -52,8 +52,8 @@ public class GitHubClient {
         return response.body();
     }
 
-    public List<CommitNode> getCommitNodes(String repo, String owner, int number) throws IOException {
-        Call<List<CommitNode>> retrofitCall = service.listCommits(accessToken, API_VERSION_SPEC, repo, owner, number);
+    public List<CommitNode> getCommitNodes(String owner, String repo, int number) throws IOException {
+        Call<List<CommitNode>> retrofitCall = service.listCommits(accessToken, API_VERSION_SPEC, owner, repo, number);
 
         Response<List<CommitNode>> response = retrofitCall.execute();
 
@@ -66,8 +66,8 @@ public class GitHubClient {
         return response.body();
     }
 
-    public List<ReviewComment> getPullReview(String repo, String owner, int number) throws IOException {
-        Call<List<ReviewComment>> retrofitCall = service.listReviewComments(accessToken, API_VERSION_SPEC, repo, owner, number);
+    public List<ReviewComment> getPullReview(String owner, String repo, int number) throws IOException {
+        Call<List<ReviewComment>> retrofitCall = service.listReviewComments(accessToken, API_VERSION_SPEC, owner, repo, number);
 
         Response<List<ReviewComment>> response = retrofitCall.execute();
 
@@ -80,8 +80,8 @@ public class GitHubClient {
         return response.body();
     }
 
-    public List<IssueComment> getPullIssue(String repo, String owner, int number) throws IOException {
-        Call<List<IssueComment>> retrofitCall = service.listIssueComments(accessToken, API_VERSION_SPEC, repo, owner, number);
+    public List<IssueComment> getPullIssue(String owner, String repo, int number) throws IOException {
+        Call<List<IssueComment>> retrofitCall = service.listIssueComments(accessToken, API_VERSION_SPEC, owner, repo, number);
 
         Response<List<IssueComment>> response = retrofitCall.execute();
 
@@ -94,10 +94,8 @@ public class GitHubClient {
         return response.body();
     }
 
-    public ReviewComment createPullReview(String owner, String repo, int number, String message) throws IOException {
-        ReviewComment comm = new ReviewComment();
-        comm.setBody(message);
-        Call<ReviewComment> retrofitCall = service.createReviewComment(comm, accessToken, API_VERSION_SPEC, JSON_CONTENT_TYPE, owner, repo, number);
+    public ReviewComment createPullReview(ReviewComment reviewComment, String owner, String repo, int number) throws IOException {
+        Call<ReviewComment> retrofitCall = service.createReviewComment(reviewComment, accessToken, API_VERSION_SPEC, JSON_CONTENT_TYPE, owner, repo, number);
 
         Response<ReviewComment> response = retrofitCall.execute();
 

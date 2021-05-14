@@ -5,9 +5,7 @@ import com.example.githubclient.model.IssueComment;
 import com.example.githubclient.model.Pull;
 import com.example.githubclient.model.ReviewComment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +21,7 @@ public class GitHubClientController {
     public List<Pull> getPulls(
             @PathVariable("owner") String owner,
             @PathVariable("repo") String repoName) throws IOException {
-        return githubService.getUserRepoPulls(repoName, owner);
+        return githubService.getUserRepoPulls(owner, repoName);
     }
 
     @GetMapping("/repos/{owner}/{repo}/pull/{number}/commits")
@@ -31,7 +29,7 @@ public class GitHubClientController {
             @PathVariable("owner") String owner,
             @PathVariable("repo") String repoName,
             @PathVariable("number") int number) throws IOException {
-        return githubService.getCommitNodes(repoName, owner, number);
+        return githubService.getCommitNodes(owner, repoName, number);
     }
 
     @GetMapping("/repos/{owner}/{repo}/pull/{number}/review")
@@ -40,7 +38,7 @@ public class GitHubClientController {
             @PathVariable("owner") String owner,
             @PathVariable("repo") String repoName,
             @PathVariable("number") int number) throws IOException {
-        return githubService.getPullReview(repoName, owner, number);
+        return githubService.getPullReview(owner, repoName, number);
     }
 
     @GetMapping("/repos/{owner}/{repo}/pull/{number}/issue")
@@ -48,11 +46,21 @@ public class GitHubClientController {
             @PathVariable("owner") String owner,
             @PathVariable("repo") String repoName,
             @PathVariable("number") int number) throws IOException {
-        return githubService.getPullIssue(repoName, owner, number);
+        return githubService.getPullIssue(owner, repoName, number);
     }
 
-    @GetMapping("/repos/{owner}/{repo}/pull/{number}/review/post")
-    public ReviewComment leaveReviewComment(@PathVariable("owner") String owner,
+    @PostMapping("/repos/{owner}/{repo}/pull/{number}/review/post")
+    public ReviewComment leaveReviewComment(@RequestBody ReviewComment reviewComment,
+                                            @PathVariable("owner") String owner,
+                                            @PathVariable("repo") String repoName,
+                                            @PathVariable("number") int number) throws IOException {
+
+        return githubService.createPullReview(reviewComment, owner, repoName, number);
+    }
+
+    @PostMapping("/repos/{owner}/{repo}/pull/{number}/issue")
+    public IssueComment leaveIssueComment(@RequestBody IssueComment issueComment,
+                                          @PathVariable("owner") String owner,
                                           @PathVariable("repo") String repoName,
                                           @PathVariable("number") int number) throws IOException {
 
@@ -62,23 +70,7 @@ public class GitHubClientController {
 
         // List<CommitNode> commitNodeList = getCommit(owner, repoName, number);
 
-        String messageBody = MessageTemplateVerifier.buildMessage(pull.getTitle());
-
-        return githubService.createPullReview(owner, repoName, number, messageBody);
-    }
-
-    @GetMapping("/repos/{owner}/{repo}/pull/{number}/issue/post")
-    public IssueComment leaveIssueComment(@PathVariable("owner") String owner,
-                                      @PathVariable("repo") String repoName,
-                                      @PathVariable("number") int number) throws IOException {
-
-        Pull pull = getPulls(owner, repoName).stream()
-                .filter(p -> p.getNumber() == number)
-                .collect(Collectors.toList()).get(0);
-
-        // List<CommitNode> commitNodeList = getCommit(owner, repoName, number);
-
-        String messageBody = MessageTemplateVerifier.buildMessage(pull.getTitle());
+        String messageBody = "Hello World!";
 
         return githubService.createPullIssue(owner, repoName, number, messageBody);
     }
