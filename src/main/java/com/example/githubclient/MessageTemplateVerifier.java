@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class MessageTemplateVerifier {
 
     @Autowired
-    private GitHubClient githubService;
+    private GitHubClient gitHubClient;
 
     private static final String VERIFICATION_RESULT = "Auto-Verifier finding";
     private static final String regex = "^(GENERATOR|LEETCODE)\\s(1021|1022|1013|2021|2022)\\s(Added|Deleted|Refactored|Moved|Fixed).+";

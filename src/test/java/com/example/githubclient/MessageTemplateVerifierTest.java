@@ -4,11 +4,10 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import static com.example.githubclient.MessageTemplateVerifier.process;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 
-public class GithubClientApplicationTests extends AbstractGithubClientTest {
+public class MessageTemplateVerifierTest extends AbstractGithubClientTest {
 
 
 	@Test
@@ -24,7 +23,7 @@ public class GithubClientApplicationTests extends AbstractGithubClientTest {
 
 		String title4 = "Added My Generator";
 		String title5 = "Design";
-		String title6 = "LEETCODE 1012";
+		String title6 = "LEETCODE 1021";
 		String title7 = "Triangle solution 21.11.20";
 		String title8 = "LEETCODE 3032 Added solution for sort-list";
 		String title9 = "LEETCODE 2022 Added";

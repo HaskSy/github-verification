@@ -10,6 +10,10 @@ public class VerifierExecutor {
 
     private final GitHubService service;
 
+    String owner = "HaskSy";
+    String repo = "java_au";
+    int number = 44;
+
     public VerifierExecutor(GitHubService service) {
         this.service = service;
     }
@@ -21,11 +25,6 @@ public class VerifierExecutor {
 
     @Scheduled(cron = "*/10 * * ? * *")
     public void sendTestMessage() throws IOException {
-
-        String owner = "HaskSy";
-        String repo = "java_au";
-        int number = 44;
-
         service.sendVerificationMessage(owner, repo, number);
     }
 }

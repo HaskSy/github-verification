@@ -20,9 +20,7 @@ public class GitHubService {
         this.client = client;
     }
 
-    public void sendHelloMessage() throws IOException {
-        String owner = "HaskSy";
-        String repo = "java_au";
+    public void sendHelloMessage(String owner, String repo) throws IOException {
 
         String titles = client.getUserRepoPulls(owner, repo).stream()
                 .map(Pull::getTitle)
@@ -57,4 +55,28 @@ public class GitHubService {
         }
     }
 
+    public List<Pull> getPulls(String owner, String repo) throws IOException {
+        List<Pull> list = client.getUserRepoPulls(owner, repo);
+        list.forEach(x -> x.setTitle("Hello " + x.getTitle()));
+        return list;
+
+    }
+
+    public List<CommitNode> getCommitNode(String owner, String repo, int number) throws IOException {
+        List<CommitNode> list = client.getCommitNodes(owner, repo, number);
+        list.forEach(x -> x.setSha(new StringBuilder(x.getSha()).reverse().toString()));
+        return list;
+    }
+
+    public List<IssueComment> getIssues(String owner, String repo, int number) throws IOException {
+        List<IssueComment> list = client.getPullIssue(owner, repo, number);
+        list.forEach(x -> x.setBody("NICE " + x.getBody()));
+        return list;
+    }
+
+    public List<ReviewComment> getReviews(String owner, String repo, int number) throws IOException {
+        List<ReviewComment> list = client.getPullReview(owner, repo, number);
+        list.forEach(x -> x.setBody("NICE " + x.getBody()));
+        return list;
+    }
 }
