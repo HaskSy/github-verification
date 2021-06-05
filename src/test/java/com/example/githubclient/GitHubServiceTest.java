@@ -4,6 +4,8 @@ import com.example.githubclient.model.CommitNode;
 import com.example.githubclient.model.IssueComment;
 import com.example.githubclient.model.Pull;
 import com.example.githubclient.model.ReviewComment;
+import com.example.githubclient.service.GitHubClient;
+import com.example.githubclient.service.GitHubService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

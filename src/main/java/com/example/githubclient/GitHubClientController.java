@@ -4,6 +4,7 @@ import com.example.githubclient.model.CommitNode;
 import com.example.githubclient.model.IssueComment;
 import com.example.githubclient.model.Pull;
 import com.example.githubclient.model.ReviewComment;
+import com.example.githubclient.service.GitHubClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

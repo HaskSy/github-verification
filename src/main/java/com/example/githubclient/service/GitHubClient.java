@@ -1,5 +1,6 @@
-package com.example.githubclient;
+package com.example.githubclient.service;
 
+import com.example.githubclient.GitHubApiInterface;
 import com.example.githubclient.model.CommitNode;
 import com.example.githubclient.model.IssueComment;
 import com.example.githubclient.model.Pull;

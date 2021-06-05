@@ -1,9 +1,11 @@
-package com.example.githubclient;
+package com.example.githubclient.service;
 
+import com.example.githubclient.MessageTemplateVerifier;
 import com.example.githubclient.model.CommitNode;
 import com.example.githubclient.model.IssueComment;
 import com.example.githubclient.model.Pull;
 import com.example.githubclient.model.ReviewComment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -58,6 +60,8 @@ public class GitHubService {
     public List<Pull> getPulls(String owner, String repo) throws IOException {
         List<Pull> list = client.getUserRepoPulls(owner, repo);
         list.forEach(x -> x.setTitle("Hello " + x.getTitle()));
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.query("SELECT * FROM haha", Object::toString);
         return list;
 
     }
