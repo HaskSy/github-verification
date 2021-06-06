@@ -24,9 +24,13 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.jetbrains:annotations:19.0.0'
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile('javax.xml.bind:jaxb-api:2.3.0')
 	implementation('com.squareup.retrofit2:retrofit:2.4.0')
 	implementation('com.squareup.retrofit2:converter-gson:2.4.0')
+	implementation('org.telegram:telegrambots-spring-boot-starter:4.9.1')
+	implementation('org.springframework.boot:spring-boot-starter-jdbc')
+	runtimeOnly('org.postgresql:postgresql:42.2.16')
 }

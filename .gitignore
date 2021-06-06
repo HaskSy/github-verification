@@ -27,9 +27,8 @@
 
 ### Token ###
 token
+telegram_token
+telegram_login
 
 ### TODO.md ###
 TODO.md
-
-### scratches ###
-scratch
