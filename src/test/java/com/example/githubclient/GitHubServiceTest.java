@@ -1,9 +1,9 @@
 package com.example.githubclient;
 
-import com.example.githubclient.model.CommitNode;
-import com.example.githubclient.model.IssueComment;
-import com.example.githubclient.model.Pull;
-import com.example.githubclient.model.ReviewComment;
+import com.example.githubclient.model.github.CommitNode;
+import com.example.githubclient.model.github.IssueComment;
+import com.example.githubclient.model.github.Pull;
+import com.example.githubclient.model.github.ReviewComment;
 import com.example.githubclient.service.GitHubClient;
 import com.example.githubclient.service.GitHubService;
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class GitHubServiceTest extends AbstractGithubClientTest {
     @Before
     public void init() {
         mock = Mockito.mock(GitHubClient.class, RETURNS_DEEP_STUBS);
-        service = new GitHubService(mock);
+        service = new GitHubService(mock, null);
     }
 
     @Test

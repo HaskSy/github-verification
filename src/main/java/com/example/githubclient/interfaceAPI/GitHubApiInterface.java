@@ -1,9 +1,9 @@
-package com.example.githubclient;
+package com.example.githubclient.interfaceAPI;
 
-import com.example.githubclient.model.CommitNode;
-import com.example.githubclient.model.IssueComment;
-import com.example.githubclient.model.Pull;
-import com.example.githubclient.model.ReviewComment;
+import com.example.githubclient.model.github.CommitNode;
+import com.example.githubclient.model.github.IssueComment;
+import com.example.githubclient.model.github.Pull;
+import com.example.githubclient.model.github.ReviewComment;
 import retrofit2.Call;
 import retrofit2.http.*;
 

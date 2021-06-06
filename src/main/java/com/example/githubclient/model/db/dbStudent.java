@@ -1,4 +1,4 @@
-package com.example.githubclient.model;
+package com.example.githubclient.model.db;
 
 
 public class dbStudent {
@@ -49,11 +49,9 @@ public class dbStudent {
 
     @Override
     public String toString() {
-        return "dbStudent{" +
-                "studentId=" + studentId +
+        return  "studentId=" + studentId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", login='" + login + '\'' +
-                '}';
+                ", login='" + login + '\'';
     }
 }

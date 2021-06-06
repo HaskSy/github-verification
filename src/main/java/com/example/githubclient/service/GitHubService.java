@@ -1,11 +1,10 @@
 package com.example.githubclient.service;
 
 import com.example.githubclient.MessageTemplateVerifier;
-import com.example.githubclient.model.CommitNode;
-import com.example.githubclient.model.IssueComment;
-import com.example.githubclient.model.Pull;
-import com.example.githubclient.model.ReviewComment;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.example.githubclient.model.github.CommitNode;
+import com.example.githubclient.model.github.IssueComment;
+import com.example.githubclient.model.github.Pull;
+import com.example.githubclient.model.github.ReviewComment;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,9 +16,11 @@ import java.util.stream.Collectors;
 public class GitHubService {
 
     private final GitHubClient client;
+    private final DatabaseService dbService;
 
-    public GitHubService(GitHubClient client) {
+    public GitHubService(GitHubClient client, DatabaseService dbService) {
         this.client = client;
+        this.dbService = dbService;
     }
 
     public void sendHelloMessage(String owner, String repo) throws IOException {
@@ -60,8 +61,6 @@ public class GitHubService {
     public List<Pull> getPulls(String owner, String repo) throws IOException {
         List<Pull> list = client.getUserRepoPulls(owner, repo);
         list.forEach(x -> x.setTitle("Hello " + x.getTitle()));
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.query("SELECT * FROM haha", Object::toString);
         return list;
 
     }
@@ -83,4 +82,26 @@ public class GitHubService {
         list.forEach(x -> x.setBody("NICE " + x.getBody()));
         return list;
     }
+
+    public void checkRepo(String owner, String repo) throws IOException {
+        List<Pull> pulls = client.getUserRepoPulls(owner, repo);
+        pulls.stream().map(Pull::getNumber).forEach(number -> {
+            try {
+                sendVerificationMessage(owner, repo, number);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+
+    public void checkAllRepos() throws IOException {
+        List<List<String>> repoLoginPair = dbService.getRepoLogin();
+        for (List<String> pair : repoLoginPair) {
+            String owner = pair.get(1);
+            String repo = pair.get(0);
+            checkRepo(owner, repo);
+        }
+    }
+
 }

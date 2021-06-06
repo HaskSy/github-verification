@@ -1,10 +1,11 @@
 package com.example.githubclient.service;
 
-import com.example.githubclient.model.dbStudent;
+import com.example.githubclient.model.db.dbStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -23,6 +24,15 @@ public class DatabaseService {
                                 rs.getString("last_name"),
                                 rs.getString("login")
                         )
+        );
+    }
+
+    public List<List<String>> getRepoLogin() {
+        String sql = "SELECT name, login FROM repo INNER JOIN student ON student.student_id = repo.student_id";
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) ->
+                        Arrays.asList(rs.getString("name"), rs.getString("login"))
         );
     }
 

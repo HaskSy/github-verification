@@ -1,4 +1,4 @@
-package com.example.githubclient.model;
+package com.example.githubclient.model.db;
 
 import java.sql.Timestamp;
 
@@ -8,12 +8,14 @@ public class dbRepo {
     private String name;
     private boolean isChecked;
     private Timestamp checkDate;
+    private int studentId;
 
-    public dbRepo(int repoId, String name, boolean isChecked, Timestamp checkDate) {
+    public dbRepo(int repoId, String name, boolean isChecked, Timestamp checkDate, int studentId) {
         this.repoId = repoId;
         this.name = name;
         this.isChecked = isChecked;
         this.checkDate = checkDate;
+        this.studentId = studentId;
     }
 
     public int getRepoId() {
@@ -26,6 +28,10 @@ public class dbRepo {
 
     public String getName() {
         return name;
+    }
+
+    public int getStudentId() {
+        return studentId;
     }
 
     public void setName(String name) {
@@ -46,5 +52,9 @@ public class dbRepo {
 
     public void setCheckDate(Timestamp checkDate) {
         this.checkDate = checkDate;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 }

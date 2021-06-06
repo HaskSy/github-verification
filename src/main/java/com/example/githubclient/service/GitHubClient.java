@@ -1,10 +1,10 @@
 package com.example.githubclient.service;
 
-import com.example.githubclient.GitHubApiInterface;
-import com.example.githubclient.model.CommitNode;
-import com.example.githubclient.model.IssueComment;
-import com.example.githubclient.model.Pull;
-import com.example.githubclient.model.ReviewComment;
+import com.example.githubclient.interfaceAPI.GitHubApiInterface;
+import com.example.githubclient.model.github.CommitNode;
+import com.example.githubclient.model.github.IssueComment;
+import com.example.githubclient.model.github.Pull;
+import com.example.githubclient.model.github.ReviewComment;
 import org.springframework.stereotype.Service;
 
 import retrofit2.Call;

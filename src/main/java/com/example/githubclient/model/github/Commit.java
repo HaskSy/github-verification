@@ -1,7 +1,6 @@
-package com.example.githubclient.model;
+package com.example.githubclient.model.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 

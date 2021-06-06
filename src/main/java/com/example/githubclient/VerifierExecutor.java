@@ -5,8 +5,6 @@ import com.example.githubclient.service.GitHubService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 @Component
 public class VerifierExecutor {
 
@@ -27,10 +25,10 @@ public class VerifierExecutor {
         System.out.println("Влад Котов, где ТЗ? Ты же обещал");
     }
 
-    @Scheduled(cron = "*/10 * * ? * *")
-    public void sendTestMessage() throws IOException {
-        service.sendVerificationMessage(owner, repo, number);
-    }
+//    @Scheduled(cron = "*/10 * * ? * *")
+//    public void sendTestMessage() throws IOException {
+//        service.sendVerificationMessage(owner, repo, number);
+//    }
 //    @Scheduled(cron = "*/10 * * ? * *")
 //    public void addStudent() {
 //        dbService.addStudent(4,"HELLO", "WORLD", "logen");
@@ -39,8 +37,8 @@ public class VerifierExecutor {
 //    public void deleteStudent() {
 //        dbService.deleteStudent(1);
 //    }
-    @Scheduled(cron = "*/10 * * ? * *")
-    public void getStudents() {
-        System.out.println(dbService.getStudents());
-    }
+//    @Scheduled(cron = "*/10 * * ? * *")
+//    public void getStudents() {
+//        System.out.println(dbService.getRepoLogin());
+//    }
 }

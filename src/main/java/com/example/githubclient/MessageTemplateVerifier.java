@@ -1,22 +1,15 @@
 package com.example.githubclient;
 
-import com.example.githubclient.model.CommitNode;
-import com.example.githubclient.model.IssueComment;
-import com.example.githubclient.model.ReviewComment;
-import com.example.githubclient.service.GitHubClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.githubclient.model.github.CommitNode;
+import com.example.githubclient.model.github.IssueComment;
+import com.example.githubclient.model.github.ReviewComment;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-@RestController
 public class MessageTemplateVerifier {
-
-    @Autowired
-    private GitHubClient gitHubClient;
 
     private static final String VERIFICATION_RESULT = "Auto-Verifier finding";
     private static final String regex = "^(GENERATOR|LEETCODE)\\s(1021|1022|1013|2021|2022)\\s(Added|Deleted|Refactored|Moved|Fixed).+";
